@@ -1,15 +1,17 @@
 @extends('layouts.main_layout')
+@section('content')
 
-<h1>Create Transaction</h1>
-
-<div class="card">
-    <div class="card-header text-center font-weight-bold">
-     
+<div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+ 
+  <div class="mt-8 text-2xl">
+    <div class="d-flex justify-content-between">
+      Edit Transaction
     </div>
-    <div class="card-body">
-        {{-- {!! Form::open(['url' => 'transaction/update/'.$transaction->id]) !!} --}}
-      {{-- {!! Form::model(['method'=>'POST',['route' => 'transaction_update'] ]) !!} --}}
-      {!! Form::open(['route' => ['transaction_update', $transaction->id]]) !!}
+  </div>
+
+  <div class="mt-6 text-gray-500">
+
+    {!! Form::open(['route' => ['transaction_update', $transaction->id]]) !!}
       <div class="form-group">
         {!! Form::label('title', 'Title: ')  !!}
         {!! Form::text('title', $transaction->title, ['class'=>'form-control'])  !!}
@@ -45,6 +47,10 @@
         {!! Form::submit('Delete Transaction', ['class'=>'btn btn-danger']) !!}
         {!! Form::close() !!}
       </div>
-     </div>
-    </div>
+   
   </div>
+</div>
+
+@endsection
+
+
