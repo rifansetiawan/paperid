@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->string('title');
             $table->string('body');
             $table->integer('amount');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

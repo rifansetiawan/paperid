@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Transaction;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -30,7 +32,10 @@ class TransactionController extends Controller
     public function create()
 
     {
-        return view('transactions.create');
+        // $accounts = Account::all();
+        $accounts= [''=>'Choose Account Options...'] + DB::table('accounts')->pluck('name', 'id')->toArray();
+        // return $accounts;
+        return view('transactions.create', compact('accounts'));
     }
 
     /**
@@ -53,9 +58,11 @@ class TransactionController extends Controller
         // return $request->all();
 
         // return $user->name;
-        $input['photo_id'];
+        $input['photo_id'] = 1;
         $input['photo_id'] = 1; 
         $user->transactions()->create($input);
+
+        return redirect('/transaction');
     }
 
     /**
@@ -77,7 +84,9 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $transaction = Transaction::findOrFail($id);
+        $accounts= [''=>'Choose Account Options...'] + DB::table('accounts')->pluck('name', 'id')->toArray();
+        return view('transactions.edit', compact('transaction', 'accounts'));
     }
 
     /**
@@ -89,7 +98,11 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request -> all();
+
+         Auth::user()->transactions()->whereId($id)->first()->update($input);      
+         
+         return redirect('/transaction');
     }
 
     /**
@@ -100,6 +113,8 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $transaction_to_delete = Transaction::findOrFail($id)->delete();
+    //    $transaction_to_delete -> delete();
+       return redirect('/transaction');
     }
 }

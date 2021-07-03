@@ -1,6 +1,6 @@
 @extends('layouts.main_layout')
 
-<h1>Create Post</h1>
+<h1>Create Transaction</h1>
 
 <div class="card">
     <div class="card-header text-center font-weight-bold">
@@ -21,14 +21,15 @@
       </form> --}}
 
       {{-- {!! Form::open(['url' => 'transaction/store']) !!} --}}
-      {!! Form::open(['method'=>'POST', 'url' => 'transaction/store']) !!}
+      {!! Form::open(['method'=>'POST', 'action'=>['TransactionController@store']]) !!}
+      {{-- {!! Form::open(['method'=>'POST', 'action'=>['TransactionController@store']]) !!} --}}
       <div class="form-group">
         {!! Form::label('title', 'Title: ')  !!}
         {!! Form::text('title', null, ['class'=>'form-control'])  !!}
       </div>
       <div class="form-group">
         {!! Form::label('account_id', 'Account: ')  !!}
-        {!! Form::select('account_id', array('1'=>'options'), null, ['class'=>'form-control'])  !!}
+        {!! Form::select('account_id', $accounts, null, ['class'=>'form-control'])  !!}
       </div>
       {{-- <div class="form-group">
         {!! Form::label('photo_id', 'Photo: ')  !!}
