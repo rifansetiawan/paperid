@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use DataTables;
+use Yajra\DataTables\Html\Builder;
 
 class TransactionController extends Controller
 {
@@ -16,12 +18,35 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+
+    public function index(Request $request)
     {
         $transactions = Transaction::all();
-
+        $accounts= [''=>'Choose Account Options...'] + DB::table('accounts')->pluck('name', 'id')->toArray();
+        
+        if($request->ajax()){
+            // return datatables()->of($transactions)->make(true); 
+            // return new EloquentDataTable($transactions);
+            return Datatables::of($transactions)
+        ->addColumn('account_name',function(Transaction $transaction){
+            if ($transaction->account()->exists()) {
+                return $transaction->account()->pluck('name')->first();
+                // return implode(" ",$trans);
+            }
+            // return 'non';
+        })
+        ->addColumn('user_name',function(Transaction $transaction){
+            if ($transaction->user()->exists()) {
+                return  $transaction->user()->pluck('name')->first();
+                // return implode(" ",$users);
+            }
+            // return 'non';
+        })
+        ->make(true);
+        }
         // return Inertia::render('transactions.index', compact('transactions'));
-        return view('transactions.index', compact('transactions'));
+        return view('transactions.index', compact('transactions','accounts'));
     }
 
     /**
@@ -84,6 +109,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
+        $transactions = Transaction::all();
         $transaction = Transaction::findOrFail($id);
         $accounts= [''=>'Choose Account Options...'] + DB::table('accounts')->pluck('name', 'id')->toArray();
         return view('transactions.edit', compact('transaction', 'accounts'));
@@ -99,7 +125,7 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request -> all();
-
+        // return $input;
          Auth::user()->transactions()->whereId($id)->first()->update($input);      
          
          return redirect('/transaction');

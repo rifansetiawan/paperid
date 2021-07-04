@@ -12,5 +12,5 @@ class Account extends Model
     
     protected $softDelete = true;
     use SoftDeletes;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'type','description'];
 }

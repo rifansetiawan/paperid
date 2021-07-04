@@ -4,8 +4,10 @@
     </div>
 
     <div class="mt-8 text-2xl">
-        Welcome to your Jetstream application! Rifann
+        Welcome to your Jetstream application! Rifannss
     </div>
+
+    
 
     <div class="mt-6 text-gray-500">
         Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
@@ -13,6 +15,9 @@
         you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
         ecosystem to be a breath of fresh air. We hope you love it.
     </div>
+    {{-- <div class="mt-6 text-gray-500">
+        @include('highcharts', $transactions)
+    </div> --}}
 </div>
 
 <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">

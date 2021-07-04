@@ -16,6 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('transaction') }}" :active="request()->routeIs('transaction')">
+                        {{ __('Transaction') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('account') }}" :active="request()->routeIs('account')">
+                        {{ __('Financial Account') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -81,7 +91,6 @@
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
                                         {{ Auth::user()->name }}
-
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
@@ -92,13 +101,50 @@
 
                         <x-slot name="content">
                             <!-- Account Management -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                            
+
+                            
+                            {{-- <x-jet-dropdown-link> --}}
+                            <div  class="block  py-2">
+                                <p class="block  px-4 text-xs transition">Nama: </p>
+                                <strong class="block  px-4 text-xl transition">{{ Auth::user()->name }}</strong>
+                                {{-- {!! Form::label('name', 'Name : ',['class'=>'block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition'])  !!}
+                                <h2 class="px-4 py-1 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition"><strong>Rifan</strong></h2> --}}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                            <div class="block  py-2">
+                                <p class="block  px-4 text-xs transition">Username: </p>
+                                <strong class="block  px-4 text-xl transition">{{ __(substr(Auth::user()->email, 0, strpos(Auth::user()->email, "@"))) }}</strong>
+                            </div>
+                            <div class="block  py-2">
+                                <p class="block  px-4 text-xs transition">Last Login: </p>
+                                <strong class="block  px-4 text-xl transition">{{ __(Auth::user()->last_login_at) }}</strong>
+                            </div>
+{{-- 
+                            <div  class="block  py-2">
+                                <p class="block  px-4 text-xs transition">Nama: </p>
+                                <strong class="block  px-4 text-xl transition">{{ Auth::user()->name }}</strong> --}}
+                                {{-- {!! Form::label('name', 'Name : ',['class'=>'block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition'])  !!}
+                                <h2 class="px-4 py-1 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition"><strong>Rifan</strong></h2> --}}
+                            {{-- </div> --}}
+                             
+                                
+                            {{-- </x-jet-dropdown-link> --}}
+                        
+                            {{-- <div> --}}
+                                {{-- <p class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">Name <span>Rifan</span></p>
+                                <p  class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">Rifan</h2> --}}
+                            {{-- </div> --}}
+                            {{-- <x-jet-dropdown-link >
+                                <div>
+                                    <h2>Name</h2>
+                                </div>
+                                {{ __(Auth::user()->name) }}
                             </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link >
+                                {{ __(substr(Auth::user()->email, 0, strpos(Auth::user()->email, "@"))) }}
+                            </x-jet-dropdown-link> --}}
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -107,7 +153,12 @@
                             @endif
 
                             <div class="border-t border-gray-100"></div>
-
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage Account') }}
+                            </div>
+                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                {{ __('Profile') }}
+                            </x-jet-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

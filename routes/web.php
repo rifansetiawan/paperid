@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\TransactionController;
+use App\Models\Transaction;
+use App\Models\User;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -35,6 +38,8 @@ Route::prefix('transaction')->middleware(['auth:sanctum', 'verified' ])->group(f
 Route::prefix('financialaccount')->middleware(['auth:sanctum', 'verified' ])->group(function(){
     Route::get('/', 'FinancialAccountsController@index')->name('account');
     Route::post('/store', 'FinancialAccountsController@store')->name('account_store');
+    Route::post('/update/{id}', 'FinancialAccountsController@update' )->name('account_update');
+    Route::post('/destroy/{id}', 'FinancialAccountsController@destroy' )->name('account_destroy');
     // Route::get('/create', 'TransactionController@create')->name('transaction_create');
     // // Route::post('/store', [TransactionController::class, 'store'] )->name('transaction_store');
     // Route::post('/store', 'TransactionController@store' )->name('transaction_store');
@@ -55,5 +60,6 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     // return Inertia::render('Dashboard');
-    return view('dashboard');
+    $transactions = Transaction::all();
+    return view('dashboard', compact('transactions'));
 })->name('dashboard');

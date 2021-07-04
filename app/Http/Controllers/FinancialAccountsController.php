@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FinancialAccountsController extends Controller
 {
@@ -73,7 +74,10 @@ class FinancialAccountsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $accountselected = Account::findOrFail($id);
+        // return $input;
+        $accountselected->update($request->all());         
+        return redirect('/financialaccount');
     }
 
     /**
@@ -84,6 +88,7 @@ class FinancialAccountsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Account::findOrFail($id)->delete();
+        return redirect('/financialaccount');
     }
 }
