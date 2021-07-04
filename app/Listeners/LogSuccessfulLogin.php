@@ -27,10 +27,10 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
-        // $time = Carbon::parse(date('Y-m-d H:i:s'));
-        $time = date('Y-m-d H:i:s');
-        // $endTime = $time->addMinutes(420);
-        $endTime = $time;
+        $time = Carbon::parse(date('Y-m-d H:i:s'));
+        // $time = date('Y-m-d H:i:s');
+        $endTime = $time->addMinutes(-420);
+        // $endTime = $time;
         $user = $event->user;
         $user->last_login_at = $endTime;
         $user->last_login_ip = $this->request->ip();
