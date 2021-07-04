@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TransactionController;
+use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -61,5 +62,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     // return Inertia::render('Dashboard');
     $transactions = Transaction::all();
-    return view('dashboard', compact('transactions'));
+    $financial_accounts = Account::all();
+    return view('dashboard', compact('transactions','financial_accounts'));
 })->name('dashboard');
