@@ -27,7 +27,8 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
-        $time = Carbon::parse(date('Y-m-d H:i:s'));
+        // $time = Carbon::parse(date('Y-m-d H:i:s'));
+        $time = date('Y-m-d H:i:s');
         $endTime = $time->addMinutes(420);
         $user = $event->user;
         $user->last_login_at = $endTime;
