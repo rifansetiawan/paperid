@@ -51,7 +51,7 @@ Route::prefix('financialaccount')->middleware(['auth:sanctum', 'verified' ])->gr
 });
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return view('auth.login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
