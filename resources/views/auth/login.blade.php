@@ -1,6 +1,8 @@
-@extends('layouts.main_layout')
 
 <x-guest-layout>
+    <link rel="stylesheet" href="../../css/app.css">
+<script src="../../js/app.js" defer></script>
+
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
