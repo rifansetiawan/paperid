@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\TransactionController;
 use App\Models\Account;
 use App\Models\Transaction;
@@ -49,6 +50,8 @@ Route::prefix('financialaccount')->middleware(['auth:sanctum', 'verified' ])->gr
     // Route::post('/destroy/{id}', 'TransactionController@destroy' )->name('transaction_destroy');
     // Route::get('/rifan', 'TransactionController@index')
 });
+
+
 
 Route::get('/', function () {
     return view('auth.login', [
