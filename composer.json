@@ -18,6 +18,7 @@
         "livewire/livewire": "^2.5",
         "nesbot/carbon": "^2.50",
         "tightenco/ziggy": "^1.0",
+        "tymon/jwt-auth": "dev-develop",
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {

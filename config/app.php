@@ -163,7 +163,14 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         // Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
+        /*
+         * Package Service Providers...
+         */
+
+        /*
+         * Application Ser
         /*
          * Package Service Providers...
          */
@@ -233,7 +240,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         // 'DataTables' => Yajra\DataTables\DataTablesServiceProvider::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];
