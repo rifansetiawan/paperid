@@ -5,7 +5,7 @@
  
   <div class="mt-8 text-2xl">
     <div class="d-flex justify-content-between">
-      Create Transaction <a href="{{ route('transaction_create') }}" class="btn btn-primary pull-right">Add Transaction</a>
+      Create Transaction Testing <a href="{{ route('transaction_create') }}" class="btn btn-primary pull-right">Add Transaction</a>
     </div>
       
 
